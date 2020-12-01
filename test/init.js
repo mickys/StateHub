@@ -101,6 +101,8 @@ async function runSetup() {
 
     const TestConfig = require("../test-config.js");
 
+    const stateLib = require("../dist/lib/index");
+
     const setup = {
         network: network,
         globals: {},
@@ -127,7 +129,9 @@ async function runSetup() {
                 ERC1820: ERC1820.ContractAddress,
                 Token: null,
                 StateHub: null
-            }
+            },
+            stateLib: stateLib,
+            statehub: stateLib.statehub
         },
         settings: TestConfig.settings
     };

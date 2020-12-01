@@ -10,12 +10,12 @@ const setup = require("./init.js");
 
 async function runTests(init) {
 
-
   const tests = [
-    "external/SafeMath",
+    // "external/SafeMath",
     "1_ERC1820",
-    "2_ERC777_Token",
-    "3_ERC20Token",
+    // "2_ERC777_Token",
+    // "3_ERC20Token",
+    "4_StateHub",
   ];
 
   init.helpers.utils.toLog(

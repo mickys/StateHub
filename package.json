@@ -2,11 +2,22 @@
   "name": "statehub",
   "version": "0.0.1",
   "description": "StateHub - State Channels",
-  "main": "index.js",
+  "main": "dist/lib/index.js",
+  "types": "dist/types/index.d.ts",
   "directories": {
     "test": "test"
   },
+  "files": [
+    "index.js",
+    "build/",
+    "contracts/",
+    "scripts/",
+    "test/",
+    "dist/*"
+  ],
   "scripts": {
+    "build": "./node_modules/.bin/tsc -p . && npm run build:dec",
+    "build:dec": "scripts/declarations.sh",
     "compile": "./node_modules/.bin/truffle compile --all",
     "test": "scripts/run_tests.sh all refresh"
   },
@@ -47,6 +58,7 @@
     "solc": "0.5.17",
     "solium": "^1.2.5",
     "truffle": "^5.1.55",
+    "typescript": "^4.1.2",
     "web3": "^1.2.11",
     "web3-utils": "^1.2.11"
   },
