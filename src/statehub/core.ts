@@ -28,8 +28,38 @@ export default class statehub {
     
     constructor() {}
 
+    public toEthSignedMessageHash (messageHex) {
+        const messageBuffer = Buffer.from(messageHex.substring(2), 'hex');
+        const prefix = Buffer.from(`\u0019Ethereum Signed Message:\n${messageBuffer.length}`);
+        return utils.sha3(Buffer.concat([prefix, messageBuffer]).toString("hex"));
+    }
 
-    public getBinaryChannelCreationString( channelId: bignumber, amount: bignumber, toAddress?: string ) {
+    public async sign (messageHex, privateKey, web3)  {
+        return await web3.eth.accounts.sign(messageHex, privateKey);
+    }
+
+    public async getSpendReceipt( channelId: bignumber, round: bignumber, balanceA: bignumber, balanceB: bignumber, privateKey:string, web3: any ) {
+        const data = this.getSpendString( channelId, round, balanceA, balanceB);
+        const hash = this.toEthSignedMessageHash(data);
+        const signature = await this.sign(hash, privateKey, web3);
+        return {
+            data: data,
+            hash: hash,
+            signed: signature.signature,
+            signature: signature,
+        }
+    }
+
+    public getSpendString( channelId: bignumber, round: bignumber, balanceA: bignumber, balanceB: bignumber ): string {
+        let output = "0x";
+        output+=this.BNtoHex(channelId);
+        output+=this.BNtoHex(round);
+        output+=this.BNtoHex(balanceA);
+        output+=this.BNtoHex(balanceB);
+        return output;
+    }
+
+    public getBinaryChannelCreationString( channelId: bignumber, amount: bignumber, toAddress?: string ): string {
 
         let output = "0x";
         let type: number = 2;

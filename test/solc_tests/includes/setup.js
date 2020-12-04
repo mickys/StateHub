@@ -27,14 +27,19 @@ global.ApplicationEventTypes = {
     PROJECT_WITHDRAWN:6
 }
 
-global.TransferTypes = {
-    NOT_SET:0,
-    AUTOMATIC_REFUND:1,
-    WHITELIST_REJECTED:2,
-    CONTRIBUTION_CANCELED:3,
-    PARTICIPANT_WITHDRAW:4,
-    PROJECT_WITHDRAWN:5
+global.ChannelType = {
+    NONE    : 0,
+    A2B     : 1,
+    B2A     : 2
 }
+
+global.ChannelStateTypes = {
+    NOT_SET : 0,
+    OPEN    : 1,
+    CLOSING : 2,
+    CLOSED  : 3,
+}
+
 
 global.snapshotsEnabled = true;
 global.snapshots = {};

@@ -13,6 +13,15 @@ export default class statehub {
     binary: any;
     private channels;
     constructor();
+    toEthSignedMessageHash(messageHex: any): string;
+    sign(messageHex: any, privateKey: any, web3: any): Promise<any>;
+    getSpendReceipt(channelId: bignumber, round: bignumber, balanceA: bignumber, balanceB: bignumber, privateKey: string, web3: any): Promise<{
+        data: string;
+        hash: string;
+        signed: any;
+        signature: any;
+    }>;
+    getSpendString(channelId: bignumber, round: bignumber, balanceA: bignumber, balanceB: bignumber): string;
     getBinaryChannelCreationString(channelId: bignumber, amount: bignumber, toAddress?: string): string;
     BNtoHex(_bn: bignumber): string;
     createChannelDeposit(channelId: number, amount: number): void;
